@@ -1,7 +1,6 @@
 package com.panda.maven.onlineexamdemo.service.impl;
 
 
-import cn.hutool.crypto.SecureUtil;
 import com.panda.maven.onlineexamdemo.controller.request.UserRequest;
 import com.panda.maven.onlineexamdemo.dto.UserDto;
 import com.panda.maven.onlineexamdemo.entity.User;
@@ -46,5 +45,8 @@ public class UserService implements IUserService {
         return userDto;
 
     }
+
+    @Override
+    public User getByUsername(String username) {return userMapper.getByUsername(username);}
 
 }

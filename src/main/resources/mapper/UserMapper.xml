@@ -5,4 +5,7 @@
     <select id="selectByUsernameAndPassword" resultType="com.panda.maven.onlineexamdemo.entity.User">
         select * from user where username = #{username} and password = #{password}
     </select>
+    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.entity.User">
+        select * from user where username = #{username}
+    </select>
 </mapper>
