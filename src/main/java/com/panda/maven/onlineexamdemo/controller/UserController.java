@@ -10,8 +10,6 @@ import com.panda.maven.onlineexamdemo.service.IUserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @RestController
 public class UserController {
@@ -29,6 +27,12 @@ public class UserController {
     public Result teacherProfile(@RequestBody UserRequest request){
         User teacher = userService.getByUsername(request.getUsername());
         return Result.success(teacher);
+    }
+
+    @GetMapping("/student/profile")
+    public Result studentProfile(@RequestBody UserRequest request){
+        User student = userService.getByUsername(request.getUsername());
+        return Result.success(student);
     }
 
 

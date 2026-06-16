@@ -49,5 +49,4 @@ public class UserService implements IUserService {
     @Override
     public User getByUsername(String username) {return userMapper.getByUsername(username);}
 
-
 }
