@@ -5,7 +5,25 @@
     <select id="selectByUsernameAndPassword" resultType="com.panda.maven.onlineexamdemo.entity.User">
         select * from user where username = #{username} and password = #{password}
     </select>
-    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.entity.User">
-        select * from user where username = #{username}
+    <select id="getByUsername" resultMap="UserMap">
+        select * from user u,user_course uc,course c
+        where u.course = uc.uid
+          and uc.cid = c.course_id
+          and u.username = #{username}
     </select>
+
+    <resultMap id="UserMap" type="com.panda.maven.onlineexamdemo.entity.User">
+        <id column="username" property="username"/>
+        <result column="gender" property="gender"/>
+        <result column="phone" property="phone"/>
+        <result column="name" property="name"/>
+        <result column="college" property="college"/>
+        <result column="role" property="role"/>
+        <result column="password" property="password"/>
+        <collection property="courses" ofType="com.panda.maven.onlineexamdemo.entity.Course">
+            <id property="courseId" column="course_id"/>
+            <result property="courseName" column="course_name"/>
+            <result property="createTime" column="create_time"/>
+        </collection>
+    </resultMap>
 </mapper>

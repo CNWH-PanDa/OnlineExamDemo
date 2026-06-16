@@ -1,6 +1,7 @@
 package com.panda.maven.onlineexamdemo.entity;
 
 import lombok.Data;
+import java.util.List;
 
 @Data
 public class User {
@@ -9,7 +10,8 @@ public class User {
     private String phone;
     private String name;
     private String college;
-    private Integer courses;
+    private Integer course;
     private String password;
     private String role;
+    private List<Course> courses;
 }
