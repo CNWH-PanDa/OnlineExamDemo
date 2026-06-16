@@ -5,16 +5,14 @@ package com.panda.maven.onlineexamdemo.controller;
 import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.UserRequest;
 import com.panda.maven.onlineexamdemo.dto.UserDto;
-import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.entity.User;
 import com.panda.maven.onlineexamdemo.service.IUserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
-@RequestMapping
 public class UserController {
 
     @Resource
@@ -31,5 +29,6 @@ public class UserController {
         User teacher = userService.getByUsername(request.getUsername());
         return Result.success(teacher);
     }
+
 
 }

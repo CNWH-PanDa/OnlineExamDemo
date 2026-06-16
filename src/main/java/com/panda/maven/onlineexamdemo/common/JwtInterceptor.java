@@ -53,10 +53,9 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         String path = request.getRequestURI();
 
-        if (user.getRole().equals("student") && (path.startsWith("/api/teacher/course/exam") || path.startsWith("/api/teacher/exam"))) {
+        if (user.getRole().equals("student") && (path.startsWith("/api/teacher/profile/") || path.startsWith("/api/teacher/exam"))) {
             throw new ServiceException("学生无法访问");
         }
-
 
         try {
             // 用户密码加签验证 token
