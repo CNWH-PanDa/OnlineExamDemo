@@ -2,6 +2,7 @@ package com.panda.maven.onlineexamdemo.controller;
 
 
 import com.panda.maven.onlineexamdemo.common.Result;
+import com.panda.maven.onlineexamdemo.controller.request.ExamPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.service.IExamService;
 import jakarta.annotation.Resource;
@@ -36,9 +37,13 @@ public class ExamController {
         return Result.deleteSuccess();
     }
 
-//    @PutMapping("/update")
-//    public Result update(@RequestBody Exam exam,@PathVariable("courseName") String courseName){
-//
-//    }
+    @PutMapping("/update")
+    public Result update(@RequestBody Exam exam,@PathVariable("courseName") String courseName){
+        examService.update(exam,courseName);
+        return Result.updateSuccess();
+    }
+
+    @GetMapping("/page")
+    public Result page(ExamPageRequest request){return Result.success(examService.page(request));}
 
 }

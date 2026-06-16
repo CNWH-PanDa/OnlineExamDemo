@@ -56,6 +56,14 @@ public class Result {
         return result;
     }
 
+    public static Result updateSuccess(){
+        Result result = new Result();
+        result.setCode(SUCCESS_CODE);
+        result.setMsg("修改成功");
+        return result;
+    }
+
+
 
 
 }

@@ -5,6 +5,9 @@
         insert into exam (type,content,options,answer,score,subject)
         values (#{type},#{content},#{options},#{answer},#{score},#{subject})
     </insert>
+    <update id="update">
+        update exam set type = #{type},content = #{content},options = #{options},answer = #{answer},score =#{score},subject = #{subject} where question_id = #{questionId}
+    </update>
     <delete id="deleteById">
         delete from exam where question_id = #{id}
     </delete>
@@ -16,5 +19,20 @@
     </select>
     <select id="getById" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
         select * from exam where question_id = #{id}
+    </select>
+    <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+        select * from exam
+        <where>
+            <if test="subject != null and subject != ''">
+                subject like concat('%',#{subject},'%')
+            </if>
+            <if test="content != null and content != ''">
+                and content like concat('%',#{content},'%')
+            </if>
+            <if test="type != null and type != ''">
+                and type like concat('%',#{type},'%')
+            </if>
+        </where>
+        order by question_id desc
     </select>
 </mapper>
