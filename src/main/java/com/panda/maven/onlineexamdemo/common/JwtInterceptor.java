@@ -57,6 +57,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             throw new ServiceException("学生无法访问");
         }
 
+
         try {
             // 用户密码加签验证 token
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(user.getPassword())).build();

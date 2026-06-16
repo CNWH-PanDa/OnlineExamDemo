@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.panda.maven.onlineexamdemo.mapper.ExamMapper">
+    <insert id="addQues">
+        insert into exam (type,content,options,answer,score,subject)
+        values (#{type},#{content},#{options},#{answer},#{score},#{subject})
+    </insert>
+    <delete id="deleteById">
+        delete from exam where question_id = #{id}
+    </delete>
     <select id="getByCourseName" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
         select * from exam where subject = #{courseName}
+    </select>
+    <select id="getBySubject" resultType="com.panda.maven.onlineexamdemo.entity.Course">
+        select * from course where course_name = #{subject}
+    </select>
+    <select id="getById" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+        select * from exam where question_id = #{id}
     </select>
 </mapper>

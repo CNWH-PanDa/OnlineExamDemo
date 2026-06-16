@@ -12,11 +12,6 @@ public class Result {
     private static final String SUCCESS_CODE = "200";
     private static final String ERROR_CODE = "-1";
 
-    public static Result success(){
-        Result result = new Result();
-        result.setCode(SUCCESS_CODE);
-        return result;
-    }
 
     public static Result success(Object data){
         Result result = new Result();
@@ -46,6 +41,23 @@ public class Result {
         result.setMsg("登录成功");
         return result;
     }
+
+    public static Result addSuccess(){
+        Result result = new Result();
+        result.setCode(SUCCESS_CODE);
+        result.setMsg("添加成功");
+        return result;
+    }
+
+    public static Result deleteSuccess(){
+        Result result = new Result();
+        result.setCode(SUCCESS_CODE);
+        result.setMsg("删除成功");
+        return result;
+    }
+
+
+
 }
 
 

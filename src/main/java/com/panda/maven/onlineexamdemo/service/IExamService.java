@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface IExamService {
     List<Exam> getByCourseName(String courseName);
+
+    void addQues(Exam exam);
+
+    void deleteById(Integer id,String courseName);
 }
