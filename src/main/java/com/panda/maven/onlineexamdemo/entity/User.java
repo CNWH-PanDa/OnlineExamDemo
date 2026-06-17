@@ -14,4 +14,6 @@ public class User {
     private String password;
     private String role;
     private List<Course> courses;
+    private List<Integer> courseIds;
+
 }

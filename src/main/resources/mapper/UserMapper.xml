@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.panda.maven.onlineexamdemo.mapper.UserMapper">
-
+    <insert id="insertByIds">
+        insert into user_course (uid,cid) values
+        <foreach collection="courseIds" item="item" separator=",">
+            (#{id}, #{item})
+        </foreach>
+    </insert>
+    <update id="change">
+        update user
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="college != null and college != ''">
+                college = #{college},
+            </if>
+        </set>
+        where username = #{username}
+    </update>
+    <delete id="deleteById">
+        delete from user_course where uid = #{courseId}
+    </delete>
     <select id="selectByUsernameAndPassword" resultType="com.panda.maven.onlineexamdemo.entity.User">
         select * from user where username = #{username} and password = #{password}
     </select>
     <select id="getByUsername" resultMap="UserMap">
-        select * from user u,user_course uc,course c
-        where u.course = uc.uid
-          and uc.cid = c.course_id
-          and u.username = #{username}
+        select * from user
+        where username = #{username}
+    </select>
+    <select id="getByCourseId" resultType="com.panda.maven.onlineexamdemo.entity.Course">
+        select * from course c,user_course uc
+        where uc.uid = #{courseId}
+        and uc.cid = c.course_id
     </select>
 
     <resultMap id="UserMap" type="com.panda.maven.onlineexamdemo.entity.User">
@@ -20,10 +49,10 @@
         <result column="college" property="college"/>
         <result column="role" property="role"/>
         <result column="password" property="password"/>
-        <collection property="courses" ofType="com.panda.maven.onlineexamdemo.entity.Course">
-            <id property="courseId" column="course_id"/>
-            <result property="courseName" column="course_name"/>
-            <result property="createTime" column="create_time"/>
+        <collection property="courses"
+                    ofType="com.panda.maven.onlineexamdemo.entity.Course"
+                    select="com.panda.maven.onlineexamdemo.mapper.UserMapper.getByCourseId"
+                    column="course">
         </collection>
     </resultMap>
 </mapper>

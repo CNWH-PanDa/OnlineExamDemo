@@ -16,5 +16,5 @@ public interface IExamService {
 
     void update(Exam exam, String courseName);
 
-    PageInfo<Exam> page(BaseRequest baseRequest);
+    PageInfo<Exam> page(BaseRequest baseRequest,String courseName);
 }

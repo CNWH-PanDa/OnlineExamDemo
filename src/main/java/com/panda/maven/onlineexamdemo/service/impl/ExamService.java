@@ -20,6 +20,7 @@ public class ExamService implements IExamService {
     @Resource
     ExamMapper examMapper;
 
+    String subject = null;
     Exam exam;
 
     @Override
@@ -41,39 +42,33 @@ public class ExamService implements IExamService {
 
     @Override
     public void deleteById(Integer id,String courseName) {
-        String subject = null;
-        try {
-            subject = examMapper.getById(id).getSubject();
-        } catch (Exception e) {
-            throw new ServiceException("该题不存在");
-        }
-        if (!subject.equals(courseName)){
-            throw new ServiceException("无法在这里删除该题");
-        }
+        check(courseName);
         examMapper.deleteById(id);
     }
 
     @Override
     public void update(Exam exam, String courseName) {
-        String subject = null;
+        check(courseName);
+        examMapper.update(exam);
+    }
+
+    @Override
+    public PageInfo<Exam> page(BaseRequest baseRequest,String courseName) {
+        check(courseName);
+        PageHelper.startPage(baseRequest.getPageNum(),baseRequest.getPageSize());
+        List<Exam> list = examMapper.listByCondition(baseRequest);
+        return new PageInfo<>(list);
+    }
+
+    public void check(String courseName){
         try {
             subject = examMapper.getById(exam.getQuestionId()).getSubject();
         } catch (Exception e) {
             throw new ServiceException("该题不存在");
         }
         if (!subject.equals(courseName)){
-            throw new ServiceException("无法在这里更改该题");
+            throw new ServiceException("无法在这里操作");
         }
-
-        examMapper.update(exam);
     }
-
-    @Override
-    public PageInfo<Exam> page(BaseRequest baseRequest) {
-        PageHelper.startPage(baseRequest.getPageNum(),baseRequest.getPageSize());
-        List<Exam> list = examMapper.listByCondition(baseRequest);
-        return new PageInfo<>(list);
-    }
-
 
 }

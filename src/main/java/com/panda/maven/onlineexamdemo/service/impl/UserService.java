@@ -1,9 +1,8 @@
 package com.panda.maven.onlineexamdemo.service.impl;
 
 
-import com.panda.maven.onlineexamdemo.controller.request.UserRequest;
-import com.panda.maven.onlineexamdemo.dto.UserDto;
-import com.panda.maven.onlineexamdemo.entity.Course;
+import com.panda.maven.onlineexamdemo.controller.request.LoginRequest;
+import com.panda.maven.onlineexamdemo.dto.LoginDto;
 import com.panda.maven.onlineexamdemo.entity.User;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.UserMapper;
@@ -14,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 
 @Service
 @Slf4j
@@ -25,7 +22,7 @@ public class UserService implements IUserService {
     UserMapper userMapper;
 
     @Override
-    public UserDto login(UserRequest request) {
+    public LoginDto login(LoginRequest request) {
         User user = null;
         try {
             user = userMapper.selectByUsernameAndPassword(request.getUsername(), request.getPassword());
@@ -37,16 +34,29 @@ public class UserService implements IUserService {
             throw new ServiceException("用户名或密码错误");
         }
 
-        UserDto userDto = new UserDto();
+        LoginDto loginDto = new LoginDto();
 
         String token = TokenUtils.genToken(user.getUsername(), user.getPassword());
-        userDto.setToken(token);
-        BeanUtils.copyProperties(user,userDto);
-        return userDto;
+        loginDto.setToken(token);
+        BeanUtils.copyProperties(user, loginDto);
+        return loginDto;
 
     }
 
     @Override
     public User getByUsername(String username) {return userMapper.getByUsername(username);}
+
+    @Override
+    public void change(User newStu) {
+        if (!newStu.getRole().equals(userMapper.getByUsername(newStu.getUsername()).getRole())){
+            throw new ServiceException("你不能修改该信息");
+        }
+        userMapper.change(newStu);
+
+        if (newStu.getCourseIds() != null){
+            userMapper.deleteById(newStu.getCourse());
+            userMapper.insertByIds(newStu.getCourse(),newStu.getCourseIds());
+        }
+    }
 
 }

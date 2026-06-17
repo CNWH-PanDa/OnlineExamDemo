@@ -1,8 +1,11 @@
 package com.panda.maven.onlineexamdemo.mapper;
 
+import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 @Mapper
@@ -12,4 +15,11 @@ public interface UserMapper {
 
     User getByUsername(String username);
 
+    List<Course> getByCourseId(Integer courseId);
+
+    void change(User newStu);
+
+    void deleteById(Integer courseId);
+
+    void insertByIds(Integer id,List<Integer> courseIds);
 }

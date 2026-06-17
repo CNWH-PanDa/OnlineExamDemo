@@ -44,6 +44,6 @@ public class ExamController {
     }
 
     @GetMapping("/page")
-    public Result page(ExamPageRequest request){return Result.success(examService.page(request));}
+    public Result page(ExamPageRequest request,@PathVariable("courseName") String courseName){return Result.success(examService.page(request,courseName));}
 
 }
