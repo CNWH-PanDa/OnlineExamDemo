@@ -8,4 +8,16 @@
         and uc.uid = u.course
         and c.course_id = uc.cid
     </select>
+    <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.entity.Course">
+        select * from user u,user_course uc,course c
+        <where>
+            u.username = #{username}
+            and u.role = 'student'
+            and uc.uid = u.course
+            and c.course_id = uc.cid
+            <if test="subject != null and subject != ''">
+                and c.course_name like concat('%',#{subject},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

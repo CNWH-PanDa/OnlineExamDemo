@@ -3,6 +3,7 @@ package com.panda.maven.onlineexamdemo.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.panda.maven.onlineexamdemo.controller.request.BaseRequest;
+import com.panda.maven.onlineexamdemo.controller.request.ExamPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.ExamMapper;
@@ -53,10 +54,10 @@ public class ExamService implements IExamService {
     }
 
     @Override
-    public PageInfo<Exam> page(BaseRequest baseRequest,String courseName) {
+    public PageInfo<Exam> page(ExamPageRequest examPageRequest, String courseName) {
         check(courseName);
-        PageHelper.startPage(baseRequest.getPageNum(),baseRequest.getPageSize());
-        List<Exam> list = examMapper.listByCondition(baseRequest);
+        PageHelper.startPage(examPageRequest.getPageNum(),examPageRequest.getPageSize());
+        List<Exam> list = examMapper.listByCondition(examPageRequest);
         return new PageInfo<>(list);
     }
 

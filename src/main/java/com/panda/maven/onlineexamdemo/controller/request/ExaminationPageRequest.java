@@ -1,10 +1,9 @@
 package com.panda.maven.onlineexamdemo.controller.request;
 
+
 import lombok.Data;
 
 @Data
-public class ExamPageRequest extends BaseRequest{
+public class ExaminationPageRequest extends BaseRequest{
     private String subject;
-    private String type;
-    private String content;
 }

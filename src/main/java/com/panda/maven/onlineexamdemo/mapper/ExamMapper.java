@@ -1,6 +1,7 @@
 package com.panda.maven.onlineexamdemo.mapper;
 
 import com.panda.maven.onlineexamdemo.controller.request.BaseRequest;
+import com.panda.maven.onlineexamdemo.controller.request.ExamPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.entity.Exam;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,5 +22,5 @@ public interface ExamMapper {
 
     void update(Exam exam);
 
-    List<Exam> listByCondition(BaseRequest baseRequest);
+    List<Exam> listByCondition(ExamPageRequest examRequest);
 }

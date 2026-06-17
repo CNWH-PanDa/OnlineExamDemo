@@ -2,6 +2,7 @@ package com.panda.maven.onlineexamdemo.controller;
 
 
 import com.panda.maven.onlineexamdemo.common.Result;
+import com.panda.maven.onlineexamdemo.controller.request.ExaminationPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.service.IExaminationService;
 import jakarta.annotation.Resource;
@@ -21,5 +22,10 @@ public class ExaminationController {
     public Result list(@PathVariable("username") String username){
         List<Course> list = examinationService.list(username);
         return Result.success(list);
+    }
+
+    @GetMapping("/{username}/page")
+    public Result page(@RequestBody ExaminationPageRequest examinationPageRequest,@PathVariable("username") String username){
+        return Result.success(examinationService.getBySubject(examinationPageRequest,username));
     }
 }

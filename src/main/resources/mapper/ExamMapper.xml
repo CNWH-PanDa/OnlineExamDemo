@@ -23,9 +23,7 @@
     <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
         select * from exam
         <where>
-            <if test="subject != null and subject != ''">
-                subject like concat('%',#{subject},'%')
-            </if>
+            course_name = #{subject}
             <if test="content != null and content != ''">
                 and content like concat('%',#{content},'%')
             </if>
