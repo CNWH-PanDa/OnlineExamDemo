@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panda.maven.onlineexamdemo.mapper.ExaminationMapper">
+    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.entity.Course">
+        select * from user u,user_course uc,course c
+        where u.username = #{username}
+        and u.role = 'student'
+        and uc.uid = u.course
+        and c.course_id = uc.cid
+    </select>
+</mapper>
