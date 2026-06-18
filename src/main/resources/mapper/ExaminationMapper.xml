@@ -20,4 +20,9 @@
             </if>
         </where>
     </select>
+    <select id="getBySub" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+        select e.question_id,e.content,e.score,e.type,e.options from user u,exam e
+        where u.username = #{username}
+        and e.subject = #{subject}
+    </select>
 </mapper>

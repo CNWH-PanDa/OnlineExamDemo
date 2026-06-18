@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.panda.maven.onlineexamdemo.controller.request.BaseRequest;
 import com.panda.maven.onlineexamdemo.controller.request.ExaminationPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Course;
+import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.ExaminationMapper;
 import com.panda.maven.onlineexamdemo.service.IExaminationService;
@@ -38,6 +39,11 @@ public class ExaminationService implements IExaminationService {
             throw new ServiceException("查询错误");
         }
         return new PageInfo<>(courses);
+    }
+
+    @Override
+    public List<Exam> getBySub(String username, String subject) {
+        return examinationMapper.getBySub(username,subject);
     }
 
 }

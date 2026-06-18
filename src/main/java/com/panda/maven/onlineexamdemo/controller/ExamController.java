@@ -24,7 +24,7 @@ public class ExamController {
         return Result.success(exam);
     }
 
-    @PutMapping("/addQues")
+    @PostMapping("/addQues")
     public Result addQues(@RequestBody Exam exam,@PathVariable("courseName") String courseName){
         exam.setSubject(courseName);
         examService.addQues(exam);
