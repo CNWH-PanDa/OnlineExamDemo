@@ -1,10 +1,10 @@
 package com.panda.maven.onlineexamdemo.mapper;
 
-import com.panda.maven.onlineexamdemo.controller.request.BaseRequest;
 import com.panda.maven.onlineexamdemo.controller.request.ExamPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.entity.Exam;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public interface ExamMapper {
 
     Course getBySubject(String subject);
 
-    Exam getById(Integer id);
+    Exam getByCourseName1(String username);
 
     void deleteById(Integer id);
 
     void update(Exam exam);
 
-    List<Exam> listByCondition(ExamPageRequest examRequest);
+    List<Exam> listByCondition(@Param("examRequest") ExamPageRequest examRequest, @Param("courseName") String courseName);
 }

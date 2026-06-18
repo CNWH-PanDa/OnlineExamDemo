@@ -17,17 +17,17 @@
     <select id="getBySubject" resultType="com.panda.maven.onlineexamdemo.entity.Course">
         select * from course where course_name = #{subject}
     </select>
-    <select id="getById" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
-        select * from exam where question_id = #{id}
+    <select id="getByCourseName1" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+        select * from exam where subject = #{courseName}
     </select>
     <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
         select * from exam
         <where>
-            course_name = #{subject}
-            <if test="content != null and content != ''">
+            subject = #{courseName}
+            <if test="examRequest.content != null and examRequest.content != ''">
                 and content like concat('%',#{content},'%')
             </if>
-            <if test="type != null and type != ''">
+            <if test="examRequest.type != null and examRequest.type != ''">
                 and type like concat('%',#{type},'%')
             </if>
         </where>

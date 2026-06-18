@@ -22,7 +22,6 @@ public class ExamService implements IExamService {
     ExamMapper examMapper;
 
     String subject = null;
-    Exam exam;
 
     @Override
     public List<Exam> getByCourseName(String courseName) {
@@ -55,15 +54,17 @@ public class ExamService implements IExamService {
 
     @Override
     public PageInfo<Exam> page(ExamPageRequest examPageRequest, String courseName) {
-        check(courseName);
         PageHelper.startPage(examPageRequest.getPageNum(),examPageRequest.getPageSize());
-        List<Exam> list = examMapper.listByCondition(examPageRequest);
+        List<Exam> list = examMapper.listByCondition(examPageRequest,courseName);
+        if (list.isEmpty()){
+            throw new ServiceException("查询错误");
+        }
         return new PageInfo<>(list);
     }
 
     public void check(String courseName){
         try {
-            subject = examMapper.getById(exam.getQuestionId()).getSubject();
+            subject = examMapper.getByCourseName1(courseName).getSubject();
         } catch (Exception e) {
             throw new ServiceException("该题不存在");
         }
