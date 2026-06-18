@@ -19,4 +19,7 @@
     <select id="selectByUserName" resultType="com.panda.maven.onlineexamdemo.entity.Condition">
         select * from exam_condition where username = #{username} and subject = #{courseName} order by id desc
     </select>
+    <select id="selectBycourseName" resultType="java.lang.String">
+        select course_name from course where course_name = #{courseName}
+    </select>
 </mapper>

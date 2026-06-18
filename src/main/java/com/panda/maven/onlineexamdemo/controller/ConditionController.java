@@ -5,7 +5,6 @@ import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.ConditionPageRequest;
 import com.panda.maven.onlineexamdemo.dto.ConditionDto;
 import com.panda.maven.onlineexamdemo.entity.Condition;
-import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.service.IConditionService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;

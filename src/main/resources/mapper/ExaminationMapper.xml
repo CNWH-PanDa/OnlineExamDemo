@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.panda.maven.onlineexamdemo.mapper.ExaminationMapper">
-    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.entity.Course">
+    <insert id="submitAnswer">
+        insert into answer (username,answer,question_id)
+        values 
+            <foreach collection="answer" item="value" index="key" separator=",">
+                (#{username},#{value},#{key})
+            </foreach>
+    </insert>
+    <insert id="insert">
+        insert into exam_condition (username,subject,score)
+        values (#{username},#{subject},#{score})
+    </insert>
+    <update id="setStatus">
+        update user_course set status = 1
+        where cid = #{cid}
+        and uid = #{uid}
+    </update>
+    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.dto.CourseDto">
         select * from user u,user_course uc,course c
         where u.username = #{username}
         and u.role = 'student'
@@ -24,5 +40,25 @@
         select e.question_id,e.content,e.score,e.type,e.options from user u,exam e
         where u.username = #{username}
         and e.subject = #{subject}
+    </select>
+    <select id="totalScore" resultType="java.lang.Integer">
+        select sum(e.score) from exam e,answer a
+        where a.username = #{username}
+        and e.question_id = a.question_id
+        and e.answer = a.answer
+    </select>
+    <select id="getByUN" resultType="java.lang.Integer">
+        select course from user
+        where username = #{username}
+    </select>
+    <select id="getBySJ" resultType="java.lang.Integer">
+        select course_id from course
+        where course_name = #{subject}
+    </select>
+    <select id="getByIds" resultType="java.lang.Integer">
+        select status from user_course where uid = #{uid} and cid = #{cid}
+    </select>
+    <select id="getByUsernameAndSubject" resultType="java.lang.Integer">
+        select score from exam_condition where username = #{username} and subject = #{courseName} order by id desc limit 1
     </select>
 </mapper>

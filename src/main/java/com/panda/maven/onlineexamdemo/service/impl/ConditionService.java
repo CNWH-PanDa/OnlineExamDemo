@@ -6,7 +6,6 @@ import com.github.pagehelper.PageInfo;
 import com.panda.maven.onlineexamdemo.controller.request.ConditionPageRequest;
 import com.panda.maven.onlineexamdemo.dto.ConditionDto;
 import com.panda.maven.onlineexamdemo.entity.Condition;
-import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.ConditionMapper;
 import com.panda.maven.onlineexamdemo.service.IConditionService;
@@ -42,6 +41,13 @@ public class ConditionService implements IConditionService {
 
     @Override
     public List<Condition> selectByUserName(String courseName,String username) {
-        return conditionMapper.selectByUserName(courseName,username);
+        if (conditionMapper.selectBycourseName(courseName) == null ){
+            throw new ServiceException("学生没有选择这门课");
+        }
+        List<Condition> list = conditionMapper.selectByUserName(courseName,username);
+        if (list.isEmpty()){
+            throw new ServiceException("学生没有考这门课");
+        }
+        return list;
     }
 }

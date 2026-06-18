@@ -63,6 +63,13 @@ public class Result {
         return result;
     }
 
+    public static Result submitSuccess(Integer score){
+        Result result = new Result();
+        result.setCode(SUCCESS_CODE);
+        result.setMsg("提交成功,你的分数为" + score);
+        return result;
+    }
+
 
 
 

@@ -17,4 +17,6 @@ public interface ConditionMapper {
     List<ConditionDto> listByCondition(@Param("request") ConditionPageRequest request);
 
     List<Condition> selectByUserName(String courseName, String username);
+
+    String selectBycourseName(String courseName);
 }
