@@ -35,4 +35,5 @@ public interface ExaminationMapper {
     void setStatus(Integer uid, Integer cid);
 
     Integer getByUsernameAndSubject(String username, String courseName);
+
 }

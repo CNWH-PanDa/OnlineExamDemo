@@ -21,7 +21,7 @@ public class ExaminationController {
     IExaminationService examinationService;
 
 
-    @GetMapping()
+    @GetMapping
     public Result list(@PathVariable("username") String username){
         List<CourseDto> list = examinationService.list(username);
         return Result.success(list);
@@ -32,14 +32,19 @@ public class ExaminationController {
         return Result.success(examinationService.getBySubject(examinationPageRequest,username));
     }
 
-    @GetMapping("/page/test")
-    public Result test(@PathVariable("username") String username,@RequestBody Exam exam){
-        return Result.success(examinationService.getBySub(username,exam.getSubject()));
+    @GetMapping("/page/test/{subject}")
+    public Result test(@PathVariable("username") String username,@PathVariable("subject") String subject){
+        return Result.success(examinationService.getBySub(username,subject));
     }
 
-    @PutMapping("/page/test/submit")
+//    @PostMapping("/page/test/retake/{subject}")
+//    public Result retake(@PathVariable("username") String username,@PathVariable("subject") String subject){
+//        return null;
+//    }
+
+    @PutMapping("/page/test/{subject}/submit")
     @Transactional
-    public Result submit(@PathVariable("username") String username, @RequestBody SubmitRequest request){
+    public Result submit(@PathVariable("username") String username,@RequestBody SubmitRequest request){
         examinationService.submit(username,request.getAnswers(),request.getExam().getSubject());
         Integer toScore = examinationService.totalScore(username,request.getExam().getSubject());
         return Result.submitSuccess(toScore);

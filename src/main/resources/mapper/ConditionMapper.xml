@@ -5,14 +5,14 @@
         select * from exam_condition where role = 'student'
     </select>
     <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.dto.ConditionDto">
-        select * from user
+        select distinct ec.username,u.name,ec.subject from exam_condition ec,user u
         <where>
-            role = 'student'
+            u.role = 'student'
                  <if test="request.name != null and request.name != ''">
-                     and name = like concat('%',#{request.name},'%')
+                     and u.name = like concat('%',#{request.name},'%')
                  </if>
                 <if test="request.username != null and request.username != ''">
-                     and username = like concat('%',#{request.username},'%')
+                     and ec.username = like concat('%',#{request.username},'%')
                  </if>
         </where>
     </select>

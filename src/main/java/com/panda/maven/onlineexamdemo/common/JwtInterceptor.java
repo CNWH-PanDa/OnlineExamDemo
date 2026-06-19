@@ -41,7 +41,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         try {
             username = JWT.decode(token).getAudience().get(0);
             // 根据token中的username查询数据库
-            user = userService.getByUsername(username);
+            user = userService.getByUsername1(username);
         } catch (Exception e) {
             String errMsg = "token验证失败，请重新登录";
             log.error(errMsg + ", token=" + token, e);
@@ -56,7 +56,6 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (user.getRole().equals("student") && (path.startsWith("/api/teacher/profile/") || path.startsWith("/api/teacher/exam"))) {
             throw new ServiceException("学生无法访问");
         }
-
 
         try {
             // 用户密码加签验证 token

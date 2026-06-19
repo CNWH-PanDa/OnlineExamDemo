@@ -40,15 +40,16 @@
         where uc.uid = #{courseId}
         and uc.cid = c.course_id
     </select>
-
-    <resultMap id="UserMap" type="com.panda.maven.onlineexamdemo.entity.User">
+    <select id="getByUsername1" resultType="com.panda.maven.onlineexamdemo.entity.User">
+        select * from user where username = #{username}
+    </select>
+    <resultMap id="UserMap" type="com.panda.maven.onlineexamdemo.dto.UserDto">
         <id column="username" property="username"/>
         <result column="gender" property="gender"/>
         <result column="phone" property="phone"/>
         <result column="name" property="name"/>
         <result column="college" property="college"/>
         <result column="role" property="role"/>
-        <result column="password" property="password"/>
         <collection property="courses"
                     ofType="com.panda.maven.onlineexamdemo.entity.Course"
                     select="com.panda.maven.onlineexamdemo.mapper.UserMapper.getByCourseId"

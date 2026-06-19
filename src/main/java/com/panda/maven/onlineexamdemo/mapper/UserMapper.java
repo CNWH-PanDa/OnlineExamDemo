@@ -1,5 +1,6 @@
 package com.panda.maven.onlineexamdemo.mapper;
 
+import com.panda.maven.onlineexamdemo.dto.UserDto;
 import com.panda.maven.onlineexamdemo.entity.Course;
 import com.panda.maven.onlineexamdemo.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +14,9 @@ public interface UserMapper {
 
     User selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
-    User getByUsername(String username);
+    UserDto getByUsername(String username);
+
+    User getByUsername1(String username);
 
     List<Course> getByCourseId(Integer courseId);
 

@@ -24,7 +24,7 @@ public class ExamController {
         return Result.success(exam);
     }
 
-    @PostMapping("/addQues")
+    @PutMapping("/addQues")
     public Result addQues(@RequestBody Exam exam,@PathVariable("courseName") String courseName){
         exam.setSubject(courseName);
         examService.addQues(exam);
@@ -37,7 +37,7 @@ public class ExamController {
         return Result.deleteSuccess();
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public Result update(@RequestBody Exam exam,@PathVariable("courseName") String courseName){
         examService.update(exam,courseName);
         return Result.updateSuccess();

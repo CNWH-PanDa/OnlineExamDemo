@@ -49,6 +49,11 @@ public class ExaminationService implements IExaminationService {
 
     @Override
     public List<Exam> getBySub(String username, String subject) {
+//        Integer uid = examinationMapper.getByUN(username);
+//        Integer cid = examinationMapper.getBySJ(subject);
+//        if (examinationMapper.getByIds(uid,cid) == 1){
+//            throw new ServiceException("你已经考过了");
+//        }
         return examinationMapper.getBySub(username,subject);
     }
 

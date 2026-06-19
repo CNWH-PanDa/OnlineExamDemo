@@ -5,6 +5,7 @@ package com.panda.maven.onlineexamdemo.controller;
 import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.LoginRequest;
 import com.panda.maven.onlineexamdemo.dto.LoginDto;
+import com.panda.maven.onlineexamdemo.dto.UserDto;
 import com.panda.maven.onlineexamdemo.entity.User;
 import com.panda.maven.onlineexamdemo.service.IUserService;
 import jakarta.annotation.Resource;
@@ -25,13 +26,13 @@ public class UserController {
 
     @GetMapping("/teacher/profile")
     public Result teacherProfile(@RequestBody LoginRequest request){
-        User teacher = userService.getByUsername(request.getUsername());
+        UserDto teacher = userService.getByUsername(request.getUsername());
         return Result.success(teacher);
     }
 
     @GetMapping("/student/profile")
     public Result studentProfile(@RequestBody LoginRequest request){
-        User student = userService.getByUsername(request.getUsername());
+        UserDto student = userService.getByUsername(request.getUsername());
         return Result.success(student);
     }
 

@@ -3,6 +3,7 @@ package com.panda.maven.onlineexamdemo.service.impl;
 
 import com.panda.maven.onlineexamdemo.controller.request.LoginRequest;
 import com.panda.maven.onlineexamdemo.dto.LoginDto;
+import com.panda.maven.onlineexamdemo.dto.UserDto;
 import com.panda.maven.onlineexamdemo.entity.User;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.UserMapper;
@@ -44,7 +45,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getByUsername(String username) {return userMapper.getByUsername(username);}
+    public UserDto getByUsername(String username) {return userMapper.getByUsername(username);}
+
+    @Override
+    public User getByUsername1(String username) {return userMapper.getByUsername1(username);}
 
     @Override
     public void change(User newStu) {

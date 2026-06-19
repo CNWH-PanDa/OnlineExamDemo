@@ -6,4 +6,5 @@ import lombok.Data;
 public class ConditionDto {
     private String name;
     private String username;
+    private String subject;
 }
