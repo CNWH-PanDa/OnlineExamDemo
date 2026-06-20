@@ -12,7 +12,6 @@ import java.util.List;
 
 @Mapper
 public interface ConditionMapper {
-    List<ConditionDto> list();
 
     List<ConditionDto> listByCondition(@Param("request") ConditionPageRequest request);
 

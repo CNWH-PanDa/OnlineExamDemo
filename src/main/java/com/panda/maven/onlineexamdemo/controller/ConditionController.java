@@ -19,19 +19,13 @@ public class ConditionController {
     IConditionService conditionService;
 
 
-    @GetMapping("/list")
-    public Result list(){
-        List<ConditionDto> list = conditionService.list();
-        return Result.success(list);
-    }
-
     @GetMapping("/page")
     public Result page(ConditionPageRequest request){
         return Result.success(conditionService.page(request));
     }
 
     @GetMapping("/page/{courseName}")
-    public Result selectByCourseName(@PathVariable("courseName") String courseName, @RequestBody Condition condition){
+    public Result selectByCourseName(@PathVariable("courseName") String courseName, @ModelAttribute Condition condition){
         return Result.success(conditionService.selectByUserName(courseName,condition.getUsername()));
     }
 

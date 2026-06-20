@@ -17,13 +17,6 @@
         where cid = #{cid}
         and uid = #{uid}
     </update>
-    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.dto.CourseDto">
-        select * from user u,user_course uc,course c
-        where u.username = #{username}
-        and u.role = 'student'
-        and uc.uid = u.course
-        and c.course_id = uc.cid
-    </select>
     <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.entity.Course">
         select * from user u,user_course uc,course c
         <where>
@@ -36,16 +29,12 @@
             </if>
         </where>
     </select>
-    <select id="getBySub" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
-        select e.question_id,e.content,e.score,e.type,e.options from user u,exam e
-        where u.username = #{username}
-        and e.subject = #{subject}
-    </select>
     <select id="totalScore" resultType="java.lang.Integer">
         select sum(e.score) from exam e,answer a
         where a.username = #{username}
         and e.question_id = a.question_id
         and e.answer = a.answer
+        and e.subject = #{subject}
     </select>
     <select id="getByUN" resultType="java.lang.Integer">
         select course from user
@@ -55,10 +44,27 @@
         select course_id from course
         where course_name = #{subject}
     </select>
-    <select id="getByIds" resultType="java.lang.Integer">
-        select status from user_course where uid = #{uid} and cid = #{cid}
-    </select>
     <select id="getByUsernameAndSubject" resultType="java.lang.Integer">
         select score from exam_condition where username = #{username} and subject = #{courseName} order by id desc limit 1
+    </select>
+    <select id="getBySub" resultMap="com.panda.maven.onlineexamdemo.mapper.ExamMapper.ExamResultMap">
+    select e.question_id,e.content,e.score,e.type,e.options,e.subject from user u,exam e
+    where u.username = #{username}
+    and e.subject = #{subject}
+    </select>
+    <select id="getCourseDetailsWithStatusAndScore" resultType="com.panda.maven.onlineexamdemo.dto.CourseDto">
+        select
+            c.course_id,
+            c.course_name,
+            c.create_time,
+            ec.score,
+            uc.status
+        from user u
+                 left join user_course uc on u.course = uc.uid
+                 left join course c on uc.cid = c.course_id
+                 left join exam_condition ec on ec.username = u.username and ec.subject = c.course_name
+        where u.username = #{username}
+        and u.role = 'student'
+        order by c.course_id
     </select>
 </mapper>

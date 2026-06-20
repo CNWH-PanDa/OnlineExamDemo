@@ -22,13 +22,6 @@ public class ConditionService implements IConditionService {
     ConditionMapper conditionMapper;
 
 
-
-    @Override
-    public List<ConditionDto> list() {
-        return conditionMapper.list();
-    }
-
-
     @Override
     public PageInfo<ConditionDto> page(ConditionPageRequest request) {
         PageHelper.startPage(request.getPageNum(),request.getPageSize());

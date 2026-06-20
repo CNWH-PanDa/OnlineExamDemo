@@ -41,13 +41,13 @@ public class ExamService implements IExamService {
 
     @Override
     public void deleteById(Integer id,String courseName) {
-        check(courseName);
+        check(courseName,id);
         examMapper.deleteById(id);
     }
 
     @Override
-    public void update(Exam exam, String courseName) {
-        check(courseName);
+    public void update(Exam exam,String courseName) {
+        check(courseName,exam.getQuestionId());
         examMapper.update(exam);
     }
 
@@ -61,7 +61,7 @@ public class ExamService implements IExamService {
         return new PageInfo<>(list);
     }
 
-    public void check(String courseName){
+    public void check(String courseName,Integer id){
         try {
             subject = examMapper.getByCourseName1(courseName).getSubject();
         } catch (Exception e) {
@@ -70,6 +70,6 @@ public class ExamService implements IExamService {
         if (!subject.equals(courseName)){
             throw new ServiceException("无法在这里操作");
         }
-    }
 
+    }
 }

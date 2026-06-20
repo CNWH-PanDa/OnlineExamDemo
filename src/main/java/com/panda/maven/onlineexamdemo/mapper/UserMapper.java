@@ -18,8 +18,6 @@ public interface UserMapper {
 
     User getByUsername1(String username);
 
-    List<Course> getByCourseId(Integer courseId);
-
     void change(User newStu);
 
     void deleteById(Integer courseId);

@@ -7,13 +7,13 @@ import com.panda.maven.onlineexamdemo.entity.Exam;
 import org.apache.ibatis.annotations.Mapper;
 
 
-
 import java.util.List;
 import java.util.Map;
 
 @Mapper
 public interface ExaminationMapper {
-    List<CourseDto> getByUsername(String username);
+
+    List<CourseDto> getCourseDetailsWithStatusAndScore(String username);
 
     List<Course> listByCondition(String subject, String username);
 
@@ -21,16 +21,13 @@ public interface ExaminationMapper {
 
     void submitAnswer(String username, Map<Integer,String> answer);
 
-    Integer totalScore(String username);
+    Integer totalScore(String username,String subject);
 
     void insert(String username, String subject,Integer score);
-    
 
     Integer getByUN(String username);
 
     Integer getBySJ(String subject);
-
-    Integer getByIds(Integer uid,Integer cid);
 
     void setStatus(Integer uid, Integer cid);
 

@@ -3,14 +3,13 @@ package com.panda.maven.onlineexamdemo.controller;
 
 import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.ExaminationPageRequest;
-import com.panda.maven.onlineexamdemo.controller.request.SubmitRequest;
 import com.panda.maven.onlineexamdemo.dto.CourseDto;
 import com.panda.maven.onlineexamdemo.service.IExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/examination/{username}")
@@ -27,7 +26,7 @@ public class ExaminationController {
     }
 
     @GetMapping("/page")
-    public Result page(@RequestBody ExaminationPageRequest examinationPageRequest,@PathVariable("username") String username){
+    public Result page(@ModelAttribute ExaminationPageRequest examinationPageRequest,@PathVariable("username") String username){
         return Result.success(examinationService.getBySubject(examinationPageRequest,username));
     }
 
@@ -41,11 +40,9 @@ public class ExaminationController {
 //        return null;
 //    }
 
-    @PutMapping("/page/test/{subject}/submit")
-    @Transactional
-    public Result submit(@PathVariable("username") String username,@RequestBody SubmitRequest request){
-        examinationService.submit(username,request.getAnswers(),request.getExam().getSubject());
-        Integer toScore = examinationService.totalScore(username,request.getExam().getSubject());
+    @PostMapping("/page/test/{subject}/submit")
+    public Result submit(@PathVariable("username") String username, @PathVariable("subject") String subject, @RequestBody Map<Integer,String> answers){
+        Integer toScore = examinationService.submitExam(username,subject,answers);
         return Result.submitSuccess(toScore);
     }
 

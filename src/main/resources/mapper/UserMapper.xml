@@ -35,11 +35,6 @@
         select * from user
         where username = #{username}
     </select>
-    <select id="getByCourseId" resultType="com.panda.maven.onlineexamdemo.entity.Course">
-        select * from course c,user_course uc
-        where uc.uid = #{courseId}
-        and uc.cid = c.course_id
-    </select>
     <select id="getByUsername1" resultType="com.panda.maven.onlineexamdemo.entity.User">
         select * from user where username = #{username}
     </select>

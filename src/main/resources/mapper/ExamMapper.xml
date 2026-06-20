@@ -3,34 +3,43 @@
 <mapper namespace="com.panda.maven.onlineexamdemo.mapper.ExamMapper">
     <insert id="addQues">
         insert into exam (type,content,options,answer,score,subject)
-        values (#{type},#{content},#{options},#{answer},#{score},#{subject})
+        values (#{type},#{content},#{options,typeHandler=com.panda.maven.onlineexamdemo.common.ListTypeHandler},#{answer},#{score},#{subject})
     </insert>
     <update id="update">
-        update exam set type = #{type},content = #{content},options = #{options},answer = #{answer},score =#{score},subject = #{subject} where question_id = #{questionId}
+        update exam set type = #{type},content = #{content},options = #{options,typeHandler=com.panda.maven.onlineexamdemo.common.ListTypeHandler},answer = #{answer},score =#{score},subject = #{subject} where question_id = #{questionId}
     </update>
     <delete id="deleteById">
         delete from exam where question_id = #{id}
     </delete>
-    <select id="getByCourseName" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+    <select id="getByCourseName" resultMap="ExamResultMap">
         select * from exam where subject = #{courseName}
     </select>
     <select id="getBySubject" resultType="com.panda.maven.onlineexamdemo.entity.Course">
         select * from course where course_name = #{subject}
     </select>
     <select id="getByCourseName1" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
-        select * from exam where subject = #{courseName}
+        select subject from exam where subject = #{courseName}
     </select>
-    <select id="listByCondition" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+    <select id="listByCondition" resultMap="ExamResultMap">
         select * from exam
         <where>
             subject = #{courseName}
             <if test="examRequest.content != null and examRequest.content != ''">
-                and content like concat('%',#{content},'%')
+                and content like concat('%',#{examRequest.content},'%')
             </if>
             <if test="examRequest.type != null and examRequest.type != ''">
-                and type like concat('%',#{type},'%')
+                and `type` like concat('%',#{examRequest.type},'%')
             </if>
         </where>
         order by question_id desc
     </select>
+    <resultMap id="ExamResultMap" type="com.panda.maven.onlineexamdemo.entity.Exam">
+        <id column="question_id" property="questionId"/>
+        <result column="type" property="type"/>
+        <result column="content" property="content"/>
+        <result column="options" property="options" typeHandler="com.panda.maven.onlineexamdemo.common.ListTypeHandler"/>
+        <result column="answer" property="answer"/>
+        <result column="score" property="score"/>
+        <result column="subject" property="subject"/>
+    </resultMap>
 </mapper>

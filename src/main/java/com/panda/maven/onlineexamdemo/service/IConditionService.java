@@ -9,7 +9,6 @@ import com.panda.maven.onlineexamdemo.entity.Condition;
 import java.util.List;
 
 public interface IConditionService {
-    List<ConditionDto> list();
 
     PageInfo<ConditionDto> page(ConditionPageRequest request);
 

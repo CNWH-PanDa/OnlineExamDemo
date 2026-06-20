@@ -17,7 +17,5 @@ public interface IExaminationService {
 
     List<Exam> getBySub(String username, String subject);
 
-    void submit(String username, Map<Integer,String> answer,String subject);
-
-    Integer totalScore(String username,String subject);
+    Integer submitExam(String username, String subject, Map<Integer, String> answers);
 }

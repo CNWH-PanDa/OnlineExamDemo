@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 public class Result {
-    private String code;
+    private Integer code;
     private Object data;
     private String msg;
 
-    private static final String SUCCESS_CODE = "200";
-    private static final String ERROR_CODE = "-1";
+    private static final Integer SUCCESS_CODE = 200;
+    private static final Integer ERROR_CODE = -1;
 
 
     public static Result success(Object data){
@@ -27,7 +27,7 @@ public class Result {
         return result;
     }
 
-    public static Result error(String code,String msg){
+    public static Result error(Integer code,String msg){
         Result result = new Result();
         result.setCode(code);
         result.setMsg(msg);

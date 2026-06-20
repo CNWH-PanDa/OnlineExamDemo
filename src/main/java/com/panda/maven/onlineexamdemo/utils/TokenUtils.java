@@ -4,8 +4,6 @@ package com.panda.maven.onlineexamdemo.utils;
 import cn.hutool.core.date.DateUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.panda.maven.onlineexamdemo.service.IUserService;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,14 +14,13 @@ import java.util.Date;
 @Slf4j
 public class TokenUtils {
 
-    @Resource
-    private IUserService userService;
+    private static final String JWT_SECRET = "OnlineExamSecretKey2026!";
 
-    public static String genToken(String username, String sign) {
+    public static String genToken(String username) {
         return JWT.create()
                 .withAudience(username)
                 .withExpiresAt(DateUtil.offsetHour(new Date(), 2))
-                .sign(Algorithm.HMAC256(sign));
+                .sign(Algorithm.HMAC256(JWT_SECRET));
     }
 }
 

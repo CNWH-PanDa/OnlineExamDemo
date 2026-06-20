@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -37,7 +38,7 @@ public class UserService implements IUserService {
 
         LoginDto loginDto = new LoginDto();
 
-        String token = TokenUtils.genToken(user.getUsername(), user.getPassword());
+        String token = TokenUtils.genToken(user.getUsername());
         loginDto.setToken(token);
         BeanUtils.copyProperties(user, loginDto);
         return loginDto;
@@ -51,6 +52,7 @@ public class UserService implements IUserService {
     public User getByUsername1(String username) {return userMapper.getByUsername1(username);}
 
     @Override
+    @Transactional
     public void change(User newStu) {
         if (!newStu.getRole().equals(userMapper.getByUsername(newStu.getUsername()).getRole())){
             throw new ServiceException("你不能修改该信息");

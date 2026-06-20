@@ -25,13 +25,13 @@ public class UserController {
     }
 
     @GetMapping("/teacher/profile")
-    public Result teacherProfile(@RequestBody LoginRequest request){
+    public Result teacherProfile(@ModelAttribute LoginRequest request){
         UserDto teacher = userService.getByUsername(request.getUsername());
         return Result.success(teacher);
     }
 
     @GetMapping("/student/profile")
-    public Result studentProfile(@RequestBody LoginRequest request){
+    public Result studentProfile(@ModelAttribute LoginRequest request){
         UserDto student = userService.getByUsername(request.getUsername());
         return Result.success(student);
     }
