@@ -7,8 +7,8 @@ import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.ExamMapper;
 import com.panda.maven.onlineexamdemo.service.IExamService;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class ExamService implements IExamService {
 
-    @Resource
+    @Autowired
     ExamMapper examMapper;
 
     String subject = null;

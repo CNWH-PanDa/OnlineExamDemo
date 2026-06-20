@@ -9,9 +9,9 @@ import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.UserMapper;
 import com.panda.maven.onlineexamdemo.service.IUserService;
 import com.panda.maven.onlineexamdemo.utils.TokenUtils;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserService implements IUserService {
 
-    @Resource
+    @Autowired
     UserMapper userMapper;
 
     @Override

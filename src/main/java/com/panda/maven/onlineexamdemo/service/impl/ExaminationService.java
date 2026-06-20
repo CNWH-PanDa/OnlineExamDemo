@@ -9,7 +9,7 @@ import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.exception.ServiceException;
 import com.panda.maven.onlineexamdemo.mapper.ExaminationMapper;
 import com.panda.maven.onlineexamdemo.service.IExaminationService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class ExaminationService implements IExaminationService {
 
-    @Resource
+    @Autowired
     ExaminationMapper examinationMapper;
 
     @Override

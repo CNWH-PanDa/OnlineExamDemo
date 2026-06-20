@@ -5,9 +5,8 @@ import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.ExaminationPageRequest;
 import com.panda.maven.onlineexamdemo.controller.request.SubmitRequest;
 import com.panda.maven.onlineexamdemo.dto.CourseDto;
-import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.service.IExaminationService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ import java.util.List;
 @RequestMapping("/examination/{username}")
 public class ExaminationController {
 
-    @Resource
+    @Autowired
     IExaminationService examinationService;
 
 

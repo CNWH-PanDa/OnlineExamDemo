@@ -6,7 +6,7 @@ import com.panda.maven.onlineexamdemo.controller.request.ConditionPageRequest;
 import com.panda.maven.onlineexamdemo.dto.ConditionDto;
 import com.panda.maven.onlineexamdemo.entity.Condition;
 import com.panda.maven.onlineexamdemo.service.IConditionService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/teacher/profile/exam")
 public class ConditionController {
 
-    @Resource
+    @Autowired
     IConditionService conditionService;
 
 

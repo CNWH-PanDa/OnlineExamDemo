@@ -5,7 +5,7 @@ import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.ExamPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Exam;
 import com.panda.maven.onlineexamdemo.service.IExamService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/teacher/profile/exam/{courseName}")
 public class ExamController {
 
-    @Resource
+    @Autowired
     IExamService examService;
 
 

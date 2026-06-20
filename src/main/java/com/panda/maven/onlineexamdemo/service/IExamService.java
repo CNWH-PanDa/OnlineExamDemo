@@ -1,7 +1,6 @@
 package com.panda.maven.onlineexamdemo.service;
 
 import com.github.pagehelper.PageInfo;
-import com.panda.maven.onlineexamdemo.controller.request.BaseRequest;
 import com.panda.maven.onlineexamdemo.controller.request.ExamPageRequest;
 import com.panda.maven.onlineexamdemo.entity.Exam;
 

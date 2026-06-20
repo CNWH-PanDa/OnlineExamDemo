@@ -8,14 +8,14 @@ import com.panda.maven.onlineexamdemo.dto.LoginDto;
 import com.panda.maven.onlineexamdemo.dto.UserDto;
 import com.panda.maven.onlineexamdemo.entity.User;
 import com.panda.maven.onlineexamdemo.service.IUserService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class UserController {
 
-    @Resource
+    @Autowired
     IUserService userService;
 
     @PostMapping("/auth/login")
