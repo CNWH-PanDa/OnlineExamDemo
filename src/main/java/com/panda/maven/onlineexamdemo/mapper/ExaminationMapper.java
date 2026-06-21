@@ -33,4 +33,5 @@ public interface ExaminationMapper {
 
     Integer getByUsernameAndSubject(String username, String courseName);
 
+    Exam getByUsername(String username);
 }

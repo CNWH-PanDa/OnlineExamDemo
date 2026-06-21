@@ -35,10 +35,6 @@ public class ExaminationController {
         return Result.success(examinationService.getBySub(username,subject));
     }
 
-//    @PostMapping("/page/test/retake/{subject}")
-//    public Result retake(@PathVariable("username") String username,@PathVariable("subject") String subject){
-//        return null;
-//    }
 
     @PostMapping("/page/test/{subject}/submit")
     public Result submit(@PathVariable("username") String username, @PathVariable("subject") String subject, @RequestBody Map<Integer,String> answers){

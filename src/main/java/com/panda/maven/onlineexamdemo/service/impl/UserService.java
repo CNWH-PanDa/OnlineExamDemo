@@ -54,9 +54,9 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public void change(User newStu) {
-        if (!newStu.getRole().equals(userMapper.getByUsername(newStu.getUsername()).getRole())){
-            throw new ServiceException("你不能修改该信息");
-        }
+//        if (!newStu.getRole().equals(userMapper.getByUsername(newStu.getUsername()).getRole())){
+//            throw new ServiceException("你不能修改该信息");
+//        }
         userMapper.change(newStu);
 
         if (newStu.getCourseIds() != null){

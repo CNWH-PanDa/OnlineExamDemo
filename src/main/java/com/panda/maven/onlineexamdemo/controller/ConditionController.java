@@ -3,7 +3,6 @@ package com.panda.maven.onlineexamdemo.controller;
 
 import com.panda.maven.onlineexamdemo.common.Result;
 import com.panda.maven.onlineexamdemo.controller.request.ConditionPageRequest;
-import com.panda.maven.onlineexamdemo.dto.ConditionDto;
 import com.panda.maven.onlineexamdemo.entity.Condition;
 import com.panda.maven.onlineexamdemo.service.IConditionService;
 import org.springframework.beans.factory.annotation.Autowired;

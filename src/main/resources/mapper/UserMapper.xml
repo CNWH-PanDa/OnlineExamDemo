@@ -32,12 +32,20 @@
         select * from user where username = #{username} and password = #{password}
     </select>
     <select id="getByUsername" resultMap="UserMap">
-        select * from user
-        where username = #{username}
+        SELECT u.*, c.course_id, c.course_name, c.create_time
+        FROM user u
+        LEFT JOIN user_course uc ON u.course = uc.uid
+        LEFT JOIN course c ON uc.cid = c.course_id
+        WHERE u.username = #{username}
     </select>
     <select id="getByUsername1" resultType="com.panda.maven.onlineexamdemo.entity.User">
         select * from user where username = #{username}
     </select>
+<!--    <select id="getByCourseId" resultType="com.panda.maven.onlineexamdemo.entity.Course">-->
+<!--        select c.* from course c-->
+<!--        inner join user_course uc on uc.cid = c.course_id-->
+<!--        where uc.uid = #{courseId}-->
+<!--    </select>-->
     <resultMap id="UserMap" type="com.panda.maven.onlineexamdemo.dto.UserDto">
         <id column="username" property="username"/>
         <result column="gender" property="gender"/>
@@ -46,9 +54,10 @@
         <result column="college" property="college"/>
         <result column="role" property="role"/>
         <collection property="courses"
-                    ofType="com.panda.maven.onlineexamdemo.entity.Course"
-                    select="com.panda.maven.onlineexamdemo.mapper.UserMapper.getByCourseId"
-                    column="course">
+                    ofType="com.panda.maven.onlineexamdemo.entity.Course">
+            <id column="course_id" property="courseId"/>
+            <result column="course_name" property="courseName"/>
+            <result column="create_time" property="createTime"/>
         </collection>
     </resultMap>
 </mapper>

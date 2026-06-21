@@ -48,23 +48,26 @@
         select score from exam_condition where username = #{username} and subject = #{courseName} order by id desc limit 1
     </select>
     <select id="getBySub" resultMap="com.panda.maven.onlineexamdemo.mapper.ExamMapper.ExamResultMap">
-    select e.question_id,e.content,e.score,e.type,e.options,e.subject from user u,exam e
-    where u.username = #{username}
-    and e.subject = #{subject}
+    select e.question_id,e.content,e.score,e.type,e.options,e.subject from exam e
+    where e.subject = #{subject}
     </select>
     <select id="getCourseDetailsWithStatusAndScore" resultType="com.panda.maven.onlineexamdemo.dto.CourseDto">
         select
             c.course_id,
             c.course_name,
             c.create_time,
-            ec.score,
+            (select ec2.score from exam_condition ec2
+             where ec2.username = u.username and ec2.subject = c.course_name
+             order by ec2.id desc limit 1) as score,
             uc.status
         from user u
-                 left join user_course uc on u.course = uc.uid
-                 left join course c on uc.cid = c.course_id
-                 left join exam_condition ec on ec.username = u.username and ec.subject = c.course_name
+            left join user_course uc on u.course = uc.uid
+            left join course c on uc.cid = c.course_id
         where u.username = #{username}
-        and u.role = 'student'
+          and u.role = 'student'
         order by c.course_id
+    </select>
+    <select id="getByUsername" resultType="com.panda.maven.onlineexamdemo.entity.Exam">
+        select role from user where username = #{username}
     </select>
 </mapper>

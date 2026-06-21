@@ -64,6 +64,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         } catch (JWTVerificationException e) {
             throw new ServiceException(ERROR_CODE_401, "token验证失败，请重新登录");
         }
+        request.setAttribute("username", username);
         return true;
     }
 }
